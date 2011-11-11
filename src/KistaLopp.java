@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,10 +11,17 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+
+/*
+ * 
+ * Huvudklassen. Här ligger mainmetodet 
+ * och huvuddelen av GUIt skapas här
+ * 
+ * */
 public class KistaLopp extends JFrame {
 
-	JButton bNy, bVisa, bTid;
-	JRadioButton rbStart, rbNamn, rbÅlder, rbTid;
+	JButton bNew, bShow, bTime;
+	JRadioButton rbStart, rbName, rbAge, rbTime;
 	JTextArea taDisplay = new JTextArea();
 
 	public KistaLopp() {
@@ -31,23 +39,30 @@ public class KistaLopp extends JFrame {
 
 		// East Panel
 
-		JPanel pEast = new JPanel();
-		JPanel pEast1 = new JPanel();
-		JPanel pEast2 = new JPanel();
+		JPanel pEast = new JPanel(); //hela east
+		JPanel pEast1 = new JPanel(); //för att putta ner pEast2
+		JPanel pEast2 = new JPanel(); //radioknapparna
 		pEast.setLayout(new GridLayout(2, 1));
 
 		JLabel sort = new JLabel("Sortering");
 		rbStart = new JRadioButton("Startnr");
-		rbNamn = new JRadioButton("Namn");
-		rbÅlder = new JRadioButton("Ålder");
-		rbTid = new JRadioButton("Tid");
+		rbName = new JRadioButton("Namn");
+		rbAge = new JRadioButton("Ålder");
+		rbTime = new JRadioButton("Tid");
+		
+		ButtonGroup bg = new ButtonGroup(); //Radiogrupp, gör att bara en knapp
+		bg.add(rbAge);						// åt gången kan vara markerad
+		bg.add(rbName);
+		bg.add(rbStart);
+		bg.add(rbTime);
+		
 
 		pEast2.setLayout(new BoxLayout(pEast2, BoxLayout.Y_AXIS));
 		pEast2.add(sort);
 		pEast2.add(rbStart);
-		pEast2.add(rbNamn);
-		pEast2.add(rbÅlder);
-		pEast2.add(rbTid);
+		pEast2.add(rbName);
+		pEast2.add(rbAge);
+		pEast2.add(rbTime);
 
 		pEast.add(pEast1);
 		pEast.add(pEast2);
@@ -57,12 +72,12 @@ public class KistaLopp extends JFrame {
 
 		JPanel pSouth = new JPanel();
 		pSouth.setLayout(new BoxLayout(pSouth, BoxLayout.X_AXIS));
-		bNy = new JButton("Ny");
-		bVisa = new JButton("Visa");
-		bTid = new JButton("Tid");
-		pSouth.add(bNy);
-		pSouth.add(bVisa);
-		pSouth.add(bTid);
+		bNew = new JButton("Ny");
+		bShow = new JButton("Visa");
+		bTime = new JButton("Tid");
+		pSouth.add(bNew);
+		pSouth.add(bShow);
+		pSouth.add(bTime);
 		add(pSouth, BorderLayout.SOUTH);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
