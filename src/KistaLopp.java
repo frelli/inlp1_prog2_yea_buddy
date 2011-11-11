@@ -26,7 +26,7 @@ public class KistaLopp extends JFrame {
 
 	public KistaLopp() {
 		super("DSV Kista Marathon");
-
+		
 		// North panel
 
 		JPanel pNorth = new JPanel();
