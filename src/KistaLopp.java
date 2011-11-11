@@ -1,5 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -23,22 +25,20 @@ public class KistaLopp extends JFrame {
 	JButton bNew, bShow, bTime;
 	JRadioButton rbStart, rbName, rbAge, rbTime;
 	JTextArea taDisplay = new JTextArea();
-
+	
+	//Konstruktorn
 	public KistaLopp() {
 		super("DSV Kista Marathon");
 		
 		// North panel
-
 		JPanel pNorth = new JPanel();
 		pNorth.add(new JLabel("DSV Kista Marathon"));
 		add(pNorth, BorderLayout.NORTH);
 
 		// Center Panel
-
 		add(new JScrollPane(taDisplay), BorderLayout.CENTER);
 
 		// East Panel
-
 		JPanel pEast = new JPanel(); //hela east
 		JPanel pEast1 = new JPanel(); //för att putta ner pEast2
 		JPanel pEast2 = new JPanel(); //radioknapparna
@@ -69,24 +69,56 @@ public class KistaLopp extends JFrame {
 		add(pEast, BorderLayout.EAST);
 
 		// South Panel
-
 		JPanel pSouth = new JPanel();
 		pSouth.setLayout(new BoxLayout(pSouth, BoxLayout.X_AXIS));
+		
 		bNew = new JButton("Ny");
+		bNew.addActionListener(new NewListener());
+		
 		bShow = new JButton("Visa");
+		bShow.addActionListener(new ShowListener());
+		
 		bTime = new JButton("Tid");
+		bTime.addActionListener(new TimeListener());
+		
 		pSouth.add(bNew);
 		pSouth.add(bShow);
 		pSouth.add(bTime);
 		add(pSouth, BorderLayout.SOUTH);
-
+		
+		//Metoder för huvudramen
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(280, 320);
 		setVisible(true);
-	}
-
+	}//KistaLopp
+	
+	//Lyssnare till knappen bNew, för att skapa nya deltagare
+	private class NewListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			
+		}//ap
+		
+	}//NewListener-klass
+	
+	//Lyssnare till knappen bShow, för att uppdatera listan som visas
+	private class ShowListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			
+		}//aP
+		
+	}//ShowListener-klass
+	
+	//Lyssnare till knappen bTime, för att lägga till en deltagares tid
+	private class TimeListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			
+		}//aP
+		
+	}//TimeListener-klass
+	
+	//Main
 	public static void main(String[] args) {
 		new KistaLopp();
-	}
+	}//Main
 
-}
+}//Klass
