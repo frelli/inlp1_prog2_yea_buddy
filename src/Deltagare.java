@@ -7,8 +7,7 @@
 public class Deltagare {
 	//statisk variabel vilket innebär att värdet kommer
 	//att vara samma för alla deltagare som skapas
-	//public så att den kan hämtas av NewDialog
-	public static int runners = 0; 
+	private static int runners = 0; 
 	
 	private String land, name;
 	private int startNr, age;
@@ -40,6 +39,11 @@ public class Deltagare {
 	//Returnerar deltagarens ålder
 	public int getAge() {
 		return age;
+	}
+	
+	//returnerar det nuvarande värdet på runners
+	public static int getRunners() {
+		return runners;
 	}
 
 	public String toString() {

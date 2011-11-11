@@ -9,6 +9,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -93,12 +94,14 @@ public class KistaLopp extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(280, 320);
 		setVisible(true);
+		setLocationRelativeTo(null);
 	}//KistaLopp
 	
 	//Lyssnare till knappen bNew, för att skapa nya deltagare
 	private class NewListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			
+			NewDialog nd = new NewDialog();
+			JOptionPane.showConfirmDialog(null, nd, "Ny deltagare", JOptionPane.YES_NO_OPTION );
 		}//ap
 		
 	}//NewListener-klass
