@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -25,6 +26,7 @@ public class KistaLopp extends JFrame {
 	JButton bNew, bShow, bTime;
 	JRadioButton rbStart, rbName, rbAge, rbTime;
 	JTextArea taDisplay = new JTextArea();
+	ArrayList<Deltagare> all = new ArrayList<Deltagare>();
 	
 	//Konstruktorn
 	public KistaLopp() {
@@ -46,6 +48,7 @@ public class KistaLopp extends JFrame {
 
 		JLabel sort = new JLabel("Sortering");
 		rbStart = new JRadioButton("Startnr");
+		rbStart.setSelected(true); //startnummer förvalt som sorteringsmetod
 		rbName = new JRadioButton("Namn");
 		rbAge = new JRadioButton("Ålder");
 		rbTime = new JRadioButton("Tid");
@@ -103,6 +106,18 @@ public class KistaLopp extends JFrame {
 	//Lyssnare till knappen bShow, för att uppdatera listan som visas
 	private class ShowListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
+			if(rbStart.isSelected()){
+				
+			}
+			else if(rbName.isSelected()){
+				
+			}
+			else if(rbAge.isSelected()){
+				
+			}
+			else if(rbTime.isSelected()){
+				
+			}
 			
 		}//aP
 		
