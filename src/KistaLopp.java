@@ -20,7 +20,7 @@ import javax.swing.JTextArea;
 
 /*
  * 
- * Huvudklassen. Här ligger mainmetodet 
+ * Huvudklassen. Här ligger mainmetodet YEEEEEEEEA
  * och huvuddelen av GUIt skapas här
  * 
  * */
