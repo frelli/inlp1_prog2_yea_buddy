@@ -15,7 +15,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-
 /*
  * 
  * Huvudklassen. Här ligger mainmetodet 
@@ -28,11 +27,11 @@ public class KistaLopp extends JFrame {
 	JRadioButton rbStart, rbName, rbAge, rbTime;
 	JTextArea taDisplay = new JTextArea();
 	ArrayList<Deltagare> all = new ArrayList<Deltagare>();
-	
-	//Konstruktorn
+
+	// Konstruktorn
 	public KistaLopp() {
 		super("DSV Kista Marathon");
-		
+
 		// North panel
 		JPanel pNorth = new JPanel();
 		pNorth.add(new JLabel("DSV Kista Marathon"));
@@ -42,24 +41,23 @@ public class KistaLopp extends JFrame {
 		add(new JScrollPane(taDisplay), BorderLayout.CENTER);
 
 		// East Panel
-		JPanel pEast = new JPanel(); //hela east
-		JPanel pEast1 = new JPanel(); //för att putta ner pEast2
-		JPanel pEast2 = new JPanel(); //radioknapparna
+		JPanel pEast = new JPanel(); // hela east
+		JPanel pEast1 = new JPanel(); // för att putta ner pEast2
+		JPanel pEast2 = new JPanel(); // radioknapparna
 		pEast.setLayout(new GridLayout(2, 1));
 
 		JLabel sort = new JLabel("Sortering");
 		rbStart = new JRadioButton("Startnr");
-		rbStart.setSelected(true); //startnummer förvalt som sorteringsmetod
+		rbStart.setSelected(true); // startnummer förvalt som sorteringsmetod
 		rbName = new JRadioButton("Namn");
 		rbAge = new JRadioButton("Ålder");
 		rbTime = new JRadioButton("Tid");
-		
-		ButtonGroup bg = new ButtonGroup(); //Radiogrupp, gör att bara en knapp
-		bg.add(rbAge);						// åt gången kan vara markerad
+
+		ButtonGroup bg = new ButtonGroup(); // Radiogrupp, gör att bara en knapp
+		bg.add(rbAge); // åt gången kan vara markerad
 		bg.add(rbName);
 		bg.add(rbStart);
 		bg.add(rbTime);
-		
 
 		pEast2.setLayout(new BoxLayout(pEast2, BoxLayout.Y_AXIS));
 		pEast2.add(sort);
@@ -75,68 +73,74 @@ public class KistaLopp extends JFrame {
 		// South Panel
 		JPanel pSouth = new JPanel();
 		pSouth.setLayout(new BoxLayout(pSouth, BoxLayout.X_AXIS));
-		
+
 		bNew = new JButton("Ny");
 		bNew.addActionListener(new NewListener());
-		
+
 		bShow = new JButton("Visa");
 		bShow.addActionListener(new ShowListener());
-		
+
 		bTime = new JButton("Tid");
 		bTime.addActionListener(new TimeListener());
-		
+
 		pSouth.add(bNew);
 		pSouth.add(bShow);
 		pSouth.add(bTime);
 		add(pSouth, BorderLayout.SOUTH);
-		
-		//Metoder för huvudramen
+
+		// Metoder för huvudramen
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(280, 320);
 		setVisible(true);
 		setLocationRelativeTo(null);
-	}//KistaLopp
-	
-	//Lyssnare till knappen bNew, för att skapa nya deltagare
-	private class NewListener implements ActionListener{
-		public void actionPerformed(ActionEvent e){
+	}// KistaLopp
+
+	// Lyssnare till knappen bNew, för att skapa nya deltagare
+	private class NewListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
 			NewDialog nd = new NewDialog();
-			JOptionPane.showConfirmDialog(null, nd, "Ny deltagare", JOptionPane.YES_NO_OPTION );
-		}//ap
-		
-	}//NewListener-klass
-	
-	//Lyssnare till knappen bShow, för att uppdatera listan som visas
-	private class ShowListener implements ActionListener{
-		public void actionPerformed(ActionEvent e){
-			if(rbStart.isSelected()){
-				
+
+			for (;;) {
+				try {
+					JOptionPane.showConfirmDialog(null, nd, "Ny deltagare",
+							JOptionPane.YES_NO_OPTION);
+
+				} catch (NumberFormatException err) {
+
+				}
 			}
-			else if(rbName.isSelected()){
-				
+		}// ap
+
+	}// NewListener-klass
+
+	// Lyssnare till knappen bShow, för att uppdatera listan som visas
+	private class ShowListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (rbStart.isSelected()) {
+
+			} else if (rbName.isSelected()) {
+
+			} else if (rbAge.isSelected()) {
+
+			} else if (rbTime.isSelected()) {
+
 			}
-			else if(rbAge.isSelected()){
-				
-			}
-			else if(rbTime.isSelected()){
-				
-			}
-			
-		}//aP
-		
-	}//ShowListener-klass
-	
-	//Lyssnare till knappen bTime, för att lägga till en deltagares tid
-	private class TimeListener implements ActionListener{
-		public void actionPerformed(ActionEvent e){
-			
-		}//aP
-		
-	}//TimeListener-klass
-	
-	//Main
+
+		}// aP
+
+	}// ShowListener-klass
+
+	// Lyssnare till knappen bTime, för att lägga till en deltagares tid
+	private class TimeListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+
+		}// aP
+
+	}// TimeListener-klass
+
+	// Main
 	public static void main(String[] args) {
 		new KistaLopp();
-	}//Main
+	}// Main
 
-}//Klass
+}// Klass
