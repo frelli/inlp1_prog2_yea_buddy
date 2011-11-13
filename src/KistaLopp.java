@@ -25,7 +25,7 @@ import javax.swing.JTextArea;
  * */
 public class KistaLopp extends JFrame {
 
-	JButton bNew, bShow, bTime;
+	JButton bNew, bShow, bTime, bAddPpl;
 	JRadioButton rbStart, rbName, rbAge, rbTime;
 	JTextArea taDisplay = new JTextArea();
 	ArrayList<Deltagare> all = new ArrayList<Deltagare>();
@@ -91,13 +91,13 @@ public class KistaLopp extends JFrame {
 		bTime = new JButton("Tid");
 		bTime.addActionListener(new TimeListener());
 		
-		JButton bAddppl = new JButton("Addera folk");
-		bAddppl.addActionListener(new AdderaListener());
+		bAddPpl = new JButton("Addera folk");
+		bAddPpl.addActionListener(new AdderaListener());
 
 		pSouth.add(bNew);
 		pSouth.add(bShow);
 		pSouth.add(bTime);
-		pSouth.add(bAddppl);
+		pSouth.add(bAddPpl);
 		add(pSouth, BorderLayout.SOUTH);
 
 		// Metoder för huvudramen
@@ -254,6 +254,7 @@ public class KistaLopp extends JFrame {
 	private class AdderaListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent ave) {
+			bAddPpl.setEnabled(false);
 			Deltagare d1 = new Deltagare("Johan", "SWE", 15);
 			all.add(d1);
 			d1.setTime(2.51);
