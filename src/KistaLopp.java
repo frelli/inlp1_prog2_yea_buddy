@@ -25,7 +25,7 @@ import javax.swing.JTextArea;
  * */
 public class KistaLopp extends JFrame {
 
-	JButton bNew, bShow, bTime, bAddPpl;
+	JButton bNew, bTime, bAddPpl;
 	JRadioButton rbStart, rbName, rbAge, rbTime;
 	JTextArea taDisplay = new JTextArea();
 	ArrayList<Deltagare> all = new ArrayList<Deltagare>();
@@ -73,7 +73,7 @@ public class KistaLopp extends JFrame {
 		pEast2.add(rbName);
 		pEast2.add(rbAge);
 		pEast2.add(rbTime);
-		
+
 		pEast.add(pEast1);
 		pEast.add(pEast2);
 		add(pEast, BorderLayout.EAST);
@@ -85,17 +85,13 @@ public class KistaLopp extends JFrame {
 		bNew = new JButton("Ny");
 		bNew.addActionListener(new NewListener());
 
-		bShow = new JButton("Visa");
-		bShow.addActionListener(new ShowListener());
-
 		bTime = new JButton("Tid");
 		bTime.addActionListener(new TimeListener());
-		
+
 		bAddPpl = new JButton("Addera folk");
 		bAddPpl.addActionListener(new AdderaListener());
 
 		pSouth.add(bNew);
-		pSouth.add(bShow);
 		pSouth.add(bTime);
 		pSouth.add(bAddPpl);
 		add(pSouth, BorderLayout.SOUTH);
@@ -133,13 +129,17 @@ public class KistaLopp extends JFrame {
 					// Kollar så att man inte lämnat namn tomt
 					if (n.equals("")) {
 						JOptionPane.showMessageDialog(null,
-								"Uppgifter om deltagarens namn saknas.");
+								"Uppgifter om deltagarens namn saknas.",
+								"Namn saknas", JOptionPane.ERROR_MESSAGE);
 
 						// Kollar så att man inte lämnat namn tomt
 					} else if (l.equals("")) {
 						JOptionPane
-								.showMessageDialog(null,
-										"Uppgifter om deltagarens nationalitet saknas.");
+								.showMessageDialog(
+										null,
+										"Uppgifter om deltagarens nationalitet saknas.",
+										"Land saknas",
+										JOptionPane.ERROR_MESSAGE);
 
 						// Om alla fält är korrekt ifyllda så sparas deltagaren
 						// i arraylistan
@@ -150,6 +150,7 @@ public class KistaLopp extends JFrame {
 						if (answer == JOptionPane.YES_OPTION) {
 							Deltagare d = new Deltagare(n, l, a);
 							all.add(d);
+							showDeltagare();
 							return; // avslutar metoden och stänger dialogen
 						}
 					}
@@ -158,7 +159,11 @@ public class KistaLopp extends JFrame {
 
 					// om no eller x så stängs det även om fel input
 					if (answer == JOptionPane.YES_OPTION)
-						JOptionPane.showMessageDialog(null, "Fel ålder");
+						JOptionPane
+								.showMessageDialog(
+										null,
+										"Fel ålder inmatad, endast jämna nummer accepteras.",
+										"Fel ålder", JOptionPane.ERROR_MESSAGE);
 					else
 						return; // avslutar metoden och stänger dialogen
 				}
@@ -167,29 +172,10 @@ public class KistaLopp extends JFrame {
 
 	}// NewListener-klass
 
-	// Lyssnare till knappen bShow, för att uppdatera listan som visas
+	// Lyssnare till radioknapparna, för att uppdatera listan som visas när en knapp väljs
 	private class ShowListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			taDisplay.setText("");// tömmer textarean
-
-			if (rbStart.isSelected()) {
-				
-				Collections.sort(all, new StartComparator());
-
-			} else if (rbName.isSelected()) {
-				Collections.sort(all, new NameComparator());
-			
-			} else if (rbAge.isSelected()) {
-				Collections.sort(all, new AgeComparator());
-				
-			} else if (rbTime.isSelected()) {
-				Collections.sort(all, new TimeComparator());
-			}
-			
-			for (Deltagare d : all){
-				taDisplay.append(d.toString()+ "\n");
-			}
-
+			showDeltagare();
 		}// aP
 
 	}// ShowListener-klass
@@ -218,9 +204,11 @@ public class KistaLopp extends JFrame {
 							break;
 						}
 					}
-					// Om deltagaren hittas så sparas tiden till denna
+					
+					// Om deltagaren hittas så sparas tiden till denna samt uppdaterar listan
 					if (del != null) {
 						del.setTime(nTd.getTime());
+						showDeltagare();
 						return;
 					}
 
@@ -228,16 +216,23 @@ public class KistaLopp extends JFrame {
 					// användaren
 					else if (del == null) {
 						JOptionPane
-								.showMessageDialog(null,
-										"Det finns ingen deltagare med det angivna startnumret.");
+								.showMessageDialog(
+										null,
+										"Det finns ingen deltagare med det angivna startnumret.",
+										"Fel startnummer",
+										JOptionPane.ERROR_MESSAGE);
 					}
 
 				} catch (NumberFormatException err) {
 
 					// om no eller x så stängs det även om fel input
 					if (answer == JOptionPane.YES_OPTION)
-						JOptionPane.showMessageDialog(null,
-								"Fel tid eller startnummer");
+						JOptionPane
+								.showMessageDialog(
+										null,
+										"Fel tid eller startnummer angivet, endast jämna nummer accepteras.",
+										"Fel tid eller startnummer",
+										JOptionPane.ERROR_MESSAGE);
 					else
 						return; // avslutar metoden och stänger dialogen
 				}
@@ -245,6 +240,30 @@ public class KistaLopp extends JFrame {
 		}// aP
 
 	}// TimeListener-klass
+	
+	// En metod för att skriva ut deltagarna i center-textfieldet taDisplay
+	// Denna metod används i diverse andra metoder för att uppdatera listan automatiskt
+	private void showDeltagare() {
+		taDisplay.setText("");// tömmer textarean
+
+		if (rbStart.isSelected()) {
+
+			Collections.sort(all, new StartComparator());
+
+		} else if (rbName.isSelected()) {
+			Collections.sort(all, new NameComparator());
+
+		} else if (rbAge.isSelected()) {
+			Collections.sort(all, new AgeComparator());
+
+		} else if (rbTime.isSelected()) {
+			Collections.sort(all, new TimeComparator());
+		}
+
+		for (Deltagare d : all) {
+			taDisplay.append(d.toString() + "\n");
+		}
+	} // slut showDeltagare
 
 	// Main
 	public static void main(String[] args) {
@@ -285,6 +304,7 @@ public class KistaLopp extends JFrame {
 			Deltagare d10 = new Deltagare("Kajsa", "SWE", 18);
 			all.add(d10);
 			d10.setTime(2.22);
+			showDeltagare();
 
 		}
 

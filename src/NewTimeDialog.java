@@ -1,3 +1,6 @@
+import java.awt.Color;
+import java.awt.GridLayout;
+
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,6 +23,7 @@ public class NewTimeDialog extends JPanel{
 		
 		//Startnummer
 		pStartingNr = new JPanel();
+		pStartingNr.setLayout(new GridLayout(1,2));
 		lStartingNr = new JLabel("Startnummer:");
 		tStartingNr = new JTextField(5);
 		pS1 = new JPanel();
@@ -32,6 +36,7 @@ public class NewTimeDialog extends JPanel{
 		
 		//Tid
 		pTime = new JPanel();
+		pTime.setLayout(new GridLayout(1,2));
 		lTime = new JLabel("Tid:");
 		tTime = new JTextField(5);
 		pT1 = new JPanel();
