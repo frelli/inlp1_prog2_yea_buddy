@@ -11,6 +11,7 @@ public class Deltagare {
 	
 	private String land, name;
 	private int startNr, age;
+	private double time = Double.MAX_VALUE;
 	
 	public Deltagare (String name, String land, int age){
 		runners++;
@@ -45,8 +46,21 @@ public class Deltagare {
 	public static int getRunners() {
 		return runners;
 	}
+	
+	//Returnerar deltagarens sluttid
+	public double getTime() {
+		return time;
+	}
+	
+	//Sätter deltagarens tid
+	public void setTime(double time) {
+		this.time = time;
+	}
 
 	public String toString() {
-		return ""+startNr;
+		String slutTid ="--";
+		if(time != Double.MAX_VALUE )
+				slutTid = String.valueOf(time);
+		return startNr+". "+name+"\t"+land+"\t"+age+"\t"+slutTid;
 	}
 }

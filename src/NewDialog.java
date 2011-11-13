@@ -47,5 +47,15 @@ public class NewDialog extends JPanel{
 		pAge.add(tAge);
 		add(pAge);
 	}
+	
+	public String getName(){
+		return tName.getText();
+	}
+	public String getLand(){
+		return tLand.getText();
+	}
+	public int getAge(){
+		return Integer.parseInt(tAge.getText());
+	}
 
 }
